@@ -45,19 +45,19 @@ const TiffinDispatch = () => {
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-gray-800">Today's Pending Orders</h2>
           {pendingOrders.length === 0 ? (
-            <Card className="p-4 text-center text-gray-500">
+            <Card className="p-4 text-center text-gray-500 bg-gradient-to-r from-orange-50 to-orange-100 shadow-md">
               No pending orders to dispatch
             </Card>
           ) : (
             <div className="space-y-3">
               {pendingOrders.map(order => (
-                <Card key={order.id} className="p-4 space-y-3 hover:shadow-md transition-shadow">
+                <Card key={order.id} className="p-4 space-y-3 bg-white hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary rounded-lg">
                   <div className="flex justify-between">
                     <div>
-                      <h3 className="font-medium">{order.customerName}</h3>
+                      <h3 className="font-medium text-gray-800">{order.customerName}</h3>
                       <p className="text-sm text-gray-500">{order.mealType}</p>
                     </div>
-                    <div className={`px-2 py-1 rounded text-xs ${
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
                       order.status === 'Pending' 
                         ? 'bg-yellow-100 text-yellow-800' 
                         : 'bg-blue-100 text-blue-800'
@@ -77,7 +77,7 @@ const TiffinDispatch = () => {
                     {order.status !== 'Dispatched' && (
                       <Button 
                         onClick={() => handleDispatch(order.id)}
-                        className="bg-primary hover:bg-primary/90 text-white"
+                        className="bg-primary hover:bg-primary/90 text-white shadow-md"
                       >
                         <Package size={18} className="mr-2" />
                         Dispatch
@@ -93,19 +93,19 @@ const TiffinDispatch = () => {
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-gray-800">Dispatched Orders</h2>
           {dispatchedOrders.length === 0 ? (
-            <Card className="p-4 text-center text-gray-500">
+            <Card className="p-4 text-center text-gray-500 bg-gradient-to-r from-orange-50 to-orange-100 shadow-md">
               No dispatched orders yet
             </Card>
           ) : (
             <div className="space-y-3">
               {dispatchedOrders.map(order => (
-                <Card key={order.id} className="p-4 space-y-3 hover:shadow-md transition-shadow">
+                <Card key={order.id} className="p-4 space-y-3 bg-white hover:shadow-lg transition-all duration-300 border-l-4 border-l-green-500 rounded-lg">
                   <div className="flex justify-between">
                     <div>
-                      <h3 className="font-medium">{order.customerName}</h3>
+                      <h3 className="font-medium text-gray-800">{order.customerName}</h3>
                       <p className="text-sm text-gray-500">{order.mealType}</p>
                     </div>
-                    <div className={`px-2 py-1 rounded text-xs ${
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
                       order.status === 'Delivered' 
                         ? 'bg-green-100 text-green-800' 
                         : 'bg-blue-100 text-blue-800'

@@ -103,7 +103,7 @@
 
 @layer utilities {
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
   }
 
   @keyframes fadeIn {
@@ -122,6 +122,18 @@
   }
   
   .glass-effect {
-    @apply bg-white/70 backdrop-blur-sm;
+    @apply bg-white/70 backdrop-blur-sm rounded-xl;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  .animation-delay-700 {
+    animation-delay: 700ms;
   }
 }
