@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 36 33% 97%;
+    --background: 30 50% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -94,10 +94,12 @@
 
   body {
     @apply bg-background text-foreground font-body;
+    letter-spacing: -0.025em;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading font-semibold;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -135,5 +137,18 @@
   
   .animation-delay-700 {
     animation-delay: 700ms;
+  }
+  
+  /* New animations and effects */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-orange-600 bg-clip-text text-transparent;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .card-shadow {
+    box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.08);
   }
 }

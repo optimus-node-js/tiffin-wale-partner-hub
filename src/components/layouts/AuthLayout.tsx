@@ -11,9 +11,9 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children, title, showBackButton = false }: AuthLayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 font-body">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-zinc-50 to-orange-50 font-body">
       {title && (
-        <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex items-center shadow-sm">
+        <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-orange-100 px-5 py-4 flex items-center shadow-sm">
           {showBackButton && (
             <button 
               onClick={() => window.history.back()}
@@ -23,7 +23,7 @@ const AuthLayout = ({ children, title, showBackButton = false }: AuthLayoutProps
               <ArrowLeft size={20} />
             </button>
           )}
-          <h1 className="text-xl font-semibold font-heading text-gray-800">{title}</h1>
+          <h1 className="text-xl font-semibold font-heading bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">{title}</h1>
         </header>
       )}
       

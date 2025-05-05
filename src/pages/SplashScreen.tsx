@@ -35,26 +35,30 @@ const SplashScreen = () => {
         
         <div className="mt-8 relative">
           <div className="w-40 h-2 bg-gray-200 rounded-full overflow-hidden mx-auto">
-            <div className="absolute top-0 left-0 h-full bg-primary rounded-full" style={{ 
-              width: '100%', 
-              animation: 'loading 1.5s ease-in-out infinite' 
-            }}></div>
+            <div className="absolute top-0 left-0 h-full bg-primary rounded-full loading-animation"></div>
           </div>
         </div>
       </div>
       
-      <style jsx>{`
-        @keyframes loading {
-          0% { width: 0%; }
-          50% { width: 100%; }
-          100% { width: 0%; }
-        }
-        
-        .glass-effect {
-          background: rgba(255, 255, 255, 0.6);
-          backdrop-filter: blur(10px);
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+          }
+          
+          .loading-animation {
+            width: 100%;
+            animation: loading 1.5s ease-in-out infinite;
+          }
+          
+          .glass-effect {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+          }
+        `}
+      </style>
     </div>
   );
 };
