@@ -1,4 +1,3 @@
-
 export interface Order {
   id: string;
   customerName: string;
@@ -31,6 +30,17 @@ export interface Stats {
   todaysOrders: number;
   tiffinsDispatched: number;
   pendingDeliveries: number;
+}
+
+export interface MealRating {
+  id: string;
+  mealId: string;
+  customerId: string;
+  customerName: string;
+  rating: number;
+  review: string;
+  date: string;
+  imageUrl?: string;
 }
 
 export const orders: Order[] = [
@@ -206,3 +216,55 @@ export const stats: Stats = {
   tiffinsDispatched: 22,
   pendingDeliveries: 13
 };
+
+export const mealRatings: MealRating[] = [
+  {
+    id: 'rating-001',
+    mealId: 'menu-001',
+    customerId: 'cust-001',
+    customerName: 'Rahul Sharma',
+    rating: 4.5,
+    review: "The Paneer Butter Masala was delicious! Perfect balance of spices and the paneer was fresh.",
+    date: '2025-05-03',
+    imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 'rating-002',
+    mealId: 'menu-002',
+    customerId: 'cust-002',
+    customerName: 'Priya Singh',
+    rating: 5,
+    review: "Dal Tadka was amazing as always. My favorite comfort food!",
+    date: '2025-05-02',
+    imageUrl: "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 'rating-003',
+    mealId: 'menu-003',
+    customerId: 'cust-003',
+    customerName: 'Amit Patel',
+    rating: 3.5,
+    review: "The Aloo Gobi was good but could use a bit more flavor.",
+    date: '2025-05-01'
+  },
+  {
+    id: 'rating-004',
+    mealId: 'menu-001',
+    customerId: 'cust-004',
+    customerName: 'Neha Verma',
+    rating: 4,
+    review: "Love the creamy texture of the gravy. Would order again!",
+    date: '2025-04-30',
+    imageUrl: "https://images.unsplash.com/photo-1631515242808-497c3d4a9c4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 'rating-005',
+    mealId: 'menu-004',
+    customerId: 'cust-005',
+    customerName: 'Rajesh Kumar',
+    rating: 5,
+    review: "Best Poha I've ever had! Light, fluffy and full of flavor.",
+    date: '2025-04-29',
+    imageUrl: "https://images.unsplash.com/photo-1606491956391-8828bf6a101d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+  }
+];

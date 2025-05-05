@@ -1,177 +1,153 @@
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import AuthLayout from "@/components/layouts/AuthLayout";
 import { useState } from "react";
-import { menuItems } from "@/data/dummyData";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "sonner";
-import { Plus, ChefHat, Check } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { menuItems, mealRatings } from "@/data/dummyData";
+import AuthLayout from "@/components/layouts/AuthLayout";
+import { MoreVertical, Plus, Star } from "lucide-react";
+import MealDetailModal from "@/components/MealDetailModal";
 
 const MenuManagement = () => {
-  const [menu, setMenu] = useState(menuItems);
-  const [newItemName, setNewItemName] = useState("");
-  const [newItemDescription, setNewItemDescription] = useState("");
-  const [newItemCategory, setNewItemCategory] = useState("Lunch");
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+  const [showMealDetailModal, setShowMealDetailModal] = useState(false);
+  
+  // Calculate average rating for each meal
+  const getMealRating = (mealId) => {
+    const ratings = mealRatings.filter(rating => rating.mealId === mealId);
+    if (ratings.length === 0) return null;
+    
+    const totalRating = ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    return (totalRating / ratings.length).toFixed(1);
+  };
 
-  const handleToggleToday = (itemId: string) => {
-    setMenu(prev => 
-      prev.map(item => 
-        item.id === itemId 
-          ? { ...item, isToday: !item.isToday } 
-          : item
-      )
+  const handleCardClick = (menuItem) => {
+    setSelectedMenuItem(menuItem);
+    setShowMealDetailModal(true);
+  };
+
+  // Filter menu items by category
+  const breakfastItems = menuItems.filter(item => item.category === 'Breakfast');
+  const lunchItems = menuItems.filter(item => item.category === 'Lunch');
+  const dinnerItems = menuItems.filter(item => item.category === 'Dinner');
+
+  const renderMenuCards = (items) => {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in">
+        {items.map((item) => {
+          const rating = getMealRating(item.id);
+          
+          return (
+            <Card 
+              key={item.id} 
+              className={`hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden ${
+                item.isToday ? 'border-l-4 border-l-green-500' : ''
+              }`}
+              onClick={() => handleCardClick(item)}
+            >
+              <CardContent className="p-5">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{item.name}</h3>
+                    <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                    
+                    <div className="flex items-center gap-2 mt-3">
+                      {rating && (
+                        <div className="flex items-center text-sm bg-amber-50 px-2 py-1 rounded">
+                          <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500 mr-1" />
+                          <span>{rating}</span>
+                          <span className="text-gray-500 text-xs ml-1">
+                            ({mealRatings.filter(r => r.mealId === item.id).length})
+                          </span>
+                        </div>
+                      )}
+                      
+                      <Badge variant="outline" className="text-xs capitalize">
+                        {item.category}
+                      </Badge>
+                      
+                      {item.isToday && (
+                        <Badge className="bg-green-100 text-green-800 hover:bg-green-200 text-xs">
+                          Today
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <MoreVertical className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>Edit Item</DropdownMenuItem>
+                      <DropdownMenuItem>
+                        {item.isToday ? "Remove from Today" : "Add to Today"}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-red-500">
+                        Delete Item
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
     );
   };
-
-  const handleAddItem = () => {
-    if (!newItemName.trim()) {
-      toast.error("Please enter an item name");
-      return;
-    }
-
-    const newItem = {
-      id: `menu-${Date.now()}`,
-      name: newItemName,
-      description: newItemDescription,
-      category: newItemCategory as "Breakfast" | "Lunch" | "Dinner",
-      isToday: true,
-    };
-
-    setMenu(prev => [...prev, newItem]);
-    setNewItemName("");
-    setNewItemDescription("");
-    toast.success("Menu item added successfully!");
-  };
-
-  const todayItems = menu.filter(item => item.isToday);
-  const otherItems = menu.filter(item => !item.isToday);
 
   return (
     <AuthLayout title="Menu Management" showBackButton>
       <div className="space-y-6">
-        <Card className="p-5 space-y-4 shadow-lg border-none bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
-          <div className="flex items-center space-x-2">
-            <ChefHat className="text-primary" size={22} />
-            <h2 className="text-lg font-semibold text-gray-800">Add New Menu Item</h2>
-          </div>
-          
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="itemName" className="text-gray-700">Item Name</Label>
-              <Input
-                id="itemName"
-                value={newItemName}
-                onChange={(e) => setNewItemName(e.target.value)}
-                placeholder="Enter item name"
-                className="mt-1 bg-white/80 focus:ring-primary focus:border-primary"
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="itemDescription" className="text-gray-700">Description</Label>
-              <Textarea
-                id="itemDescription"
-                value={newItemDescription}
-                onChange={(e) => setNewItemDescription(e.target.value)}
-                placeholder="Enter item description"
-                rows={3}
-                className="mt-1 bg-white/80 focus:ring-primary focus:border-primary"
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="itemCategory" className="text-gray-700">Category</Label>
-              <Select value={newItemCategory} onValueChange={setNewItemCategory}>
-                <SelectTrigger id="itemCategory" className="mt-1 bg-white/80 focus:ring-primary focus:border-primary">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Breakfast">Breakfast</SelectItem>
-                  <SelectItem value="Lunch">Lunch</SelectItem>
-                  <SelectItem value="Dinner">Dinner</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <Button onClick={handleAddItem} className="w-full bg-primary hover:bg-primary/90 shadow-md flex items-center justify-center">
-              <Plus size={18} className="mr-2" />
-              Add Item
-            </Button>
-          </div>
-        </Card>
-
-        <div className="space-y-3">
-          <h2 className="text-lg font-semibold text-gray-800 flex items-center">
-            <Check size={20} className="mr-2 text-green-500" />
-            Today's Menu
-          </h2>
-          {todayItems.length === 0 ? (
-            <Card className="p-4 text-center text-gray-500 bg-white shadow-md">
-              No items in today's menu yet
-            </Card>
-          ) : (
-            <div className="space-y-3">
-              {todayItems.map(item => (
-                <Card key={item.id} className="p-4 space-y-3 bg-white hover:shadow-lg transition-all duration-300 border-l-4 border-l-green-500 rounded-lg">
-                  <div className="flex justify-between">
-                    <div>
-                      <h3 className="font-medium text-gray-800">{item.name}</h3>
-                      <p className="text-sm text-gray-500">{item.category}</p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch 
-                        id={`today-${item.id}`} 
-                        checked={item.isToday}
-                        onCheckedChange={() => handleToggleToday(item.id)}
-                      />
-                      <Label htmlFor={`today-${item.id}`} className="text-sm font-medium">Today</Label>
-                    </div>
-                  </div>
-                  
-                  <p className="text-sm text-gray-700 bg-gray-50 p-2 rounded-md">{item.description}</p>
-                </Card>
-              ))}
-            </div>
-          )}
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Your Menu Items</h2>
+          <Button>
+            <Plus className="h-4 w-4 mr-2" />
+            Add New Item
+          </Button>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="text-lg font-semibold text-gray-800">Other Menu Items</h2>
-          {otherItems.length === 0 ? (
-            <Card className="p-4 text-center text-gray-500 bg-white shadow-md">
-              No additional menu items
-            </Card>
-          ) : (
-            <div className="space-y-3">
-              {otherItems.map(item => (
-                <Card key={item.id} className="p-4 space-y-3 bg-white hover:shadow-lg transition-all duration-300 border-l-4 border-l-gray-300 rounded-lg">
-                  <div className="flex justify-between">
-                    <div>
-                      <h3 className="font-medium text-gray-800">{item.name}</h3>
-                      <p className="text-sm text-gray-500">{item.category}</p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch 
-                        id={`today-${item.id}`} 
-                        checked={item.isToday}
-                        onCheckedChange={() => handleToggleToday(item.id)}
-                      />
-                      <Label htmlFor={`today-${item.id}`} className="text-sm font-medium">Today</Label>
-                    </div>
-                  </div>
-                  
-                  <p className="text-sm text-gray-700 bg-gray-50 p-2 rounded-md">{item.description}</p>
-                </Card>
-              ))}
-            </div>
-          )}
-        </div>
+        <Tabs defaultValue="all" className="w-full">
+          <TabsList className="grid grid-cols-4 mb-6">
+            <TabsTrigger value="all">All Items</TabsTrigger>
+            <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
+            <TabsTrigger value="lunch">Lunch</TabsTrigger>
+            <TabsTrigger value="dinner">Dinner</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="all" className="space-y-6">
+            {renderMenuCards(menuItems)}
+          </TabsContent>
+
+          <TabsContent value="breakfast" className="space-y-6">
+            {renderMenuCards(breakfastItems)}
+          </TabsContent>
+
+          <TabsContent value="lunch" className="space-y-6">
+            {renderMenuCards(lunchItems)}
+          </TabsContent>
+
+          <TabsContent value="dinner" className="space-y-6">
+            {renderMenuCards(dinnerItems)}
+          </TabsContent>
+        </Tabs>
       </div>
+      
+      <MealDetailModal 
+        menuItem={selectedMenuItem}
+        isOpen={showMealDetailModal}
+        onClose={() => setShowMealDetailModal(false)}
+      />
     </AuthLayout>
   );
 };

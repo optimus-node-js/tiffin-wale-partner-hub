@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -46,6 +45,26 @@ const TiffinDispatch = () => {
       )
     );
     toast.success("Tiffin marked as delivered!");
+  };
+
+  const handleStatusChange = (orderId: string, newStatus: Order['status']) => {
+    // Find the order to update
+    const updatedOrders = orders.map(order => {
+      if (order.id === orderId) {
+        // For type safety, explicitly handle each status transition
+        if (order.status === "Pending" && newStatus === "In Progress") {
+          return { ...order, status: newStatus };
+        } else if (order.status === "In Progress" && newStatus === "Dispatched") {
+          return { ...order, status: newStatus };
+        } else if (order.status === "Dispatched" && newStatus === "Delivered") {
+          return { ...order, status: newStatus };
+        }
+      }
+      return order;
+    });
+    
+    // Update with toast notification
+    toast.success(`Order ${orderId} has been updated to ${newStatus}`);
   };
 
   const pendingOrders = orderList.filter(

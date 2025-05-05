@@ -11,7 +11,7 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children, title, showBackButton = false }: AuthLayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-zinc-50 to-orange-50 font-body">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 font-body">
       {title && (
         <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-orange-100 px-5 py-4 flex items-center shadow-sm">
           {showBackButton && (
@@ -27,8 +27,8 @@ const AuthLayout = ({ children, title, showBackButton = false }: AuthLayoutProps
         </header>
       )}
       
-      <main className="flex-1 p-5 pb-20 overflow-auto">
-        <div className="max-w-3xl mx-auto">
+      <main className="flex-1 p-4 md:p-6 pb-20 overflow-auto">
+        <div className="max-w-7xl mx-auto">
           {children}
         </div>
       </main>
