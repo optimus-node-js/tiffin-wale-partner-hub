@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { useState } from "react";
 import { orders } from "@/data/dummyData";
+import { Package, CheckCircle } from "lucide-react";
 
 const TiffinDispatch = () => {
   const [orderList, setOrderList] = useState(orders);
@@ -50,7 +51,7 @@ const TiffinDispatch = () => {
           ) : (
             <div className="space-y-3">
               {pendingOrders.map(order => (
-                <Card key={order.id} className="p-4 space-y-3">
+                <Card key={order.id} className="p-4 space-y-3 hover:shadow-md transition-shadow">
                   <div className="flex justify-between">
                     <div>
                       <h3 className="font-medium">{order.customerName}</h3>
@@ -78,6 +79,7 @@ const TiffinDispatch = () => {
                         onClick={() => handleDispatch(order.id)}
                         className="bg-primary hover:bg-primary/90 text-white"
                       >
+                        <Package size={18} className="mr-2" />
                         Dispatch
                       </Button>
                     )}
@@ -97,7 +99,7 @@ const TiffinDispatch = () => {
           ) : (
             <div className="space-y-3">
               {dispatchedOrders.map(order => (
-                <Card key={order.id} className="p-4 space-y-3">
+                <Card key={order.id} className="p-4 space-y-3 hover:shadow-md transition-shadow">
                   <div className="flex justify-between">
                     <div>
                       <h3 className="font-medium">{order.customerName}</h3>
