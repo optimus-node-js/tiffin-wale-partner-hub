@@ -4,6 +4,10 @@
 
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=flat-square)
 
+**Live:** [tiffin-wale-partner-hub.vercel.app](https://tiffin-wale-partner-hub.vercel.app)
+
+Runs on sample data (`src/data/dummyData.ts`).
+
 ## Screens
 
 - Splash, login and registration
