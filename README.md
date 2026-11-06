@@ -1,73 +1,42 @@
-# Welcome to your Lovable project
+# 🍱 Tiffin Wale — Partner Hub
 
-## Project info
+> Mobile-first web app for **Tiffin Wale** kitchen partners (home-food vendors) to manage menus, dispatch tiffins, view subscriptions and respond to meal reviews.
 
-**URL**: https://lovable.dev/projects/b4d6cadf-d5bb-4221-9199-9d684c7dc9bf
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=flat-square)
 
-## How can I edit this code?
+## ✨ Screens
 
-There are several ways of editing your application.
+- Splash, login and registration
+- **Dashboard** — today's orders and metrics
+- **Menu management** — create and edit meals
+- **Tiffin dispatch** — track daily deliveries
+- **Subscription viewer** — active customer plans
+- **Meal reviews** — ratings with detail modal
+- **Profile & settings** — bottom-nav mobile layout
 
-**Use Lovable**
+## 🚀 Run
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b4d6cadf-d5bb-4221-9199-9d684c7dc9bf) and start prompting.
+```bash
+git clone https://github.com/optimus-node-js/tiffin-wale-partner-hub.git
+cd tiffin-wale-partner-hub
+```
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Currently uses dummy data (`src/data/dummyData.ts`); designed to plug into the Tiffin Wale backend.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 👤 Author
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+**Rahul Vishwakarma** — Senior Full Stack Developer · Ahmedabad, India
 
-## What technologies are used for this project?
+[![Portfolio](https://img.shields.io/badge/Portfolio-rahul--vishwakarma--portfolio.vercel.app-0A66C2?style=flat-square&logo=vercel&logoColor=white)](https://rahul-vishwakarma-portfolio.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rahul%20Vishwakarma-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/rahul-vishwakarma-101346192)
+[![Email](https://img.shields.io/badge/Email-karmarahul67%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:karmarahul67@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-optimus--node--js-181717?style=flat-square&logo=github)](https://github.com/optimus-node-js)
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b4d6cadf-d5bb-4221-9199-9d684c7dc9bf) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+If you find this project useful, consider giving it a ⭐.
